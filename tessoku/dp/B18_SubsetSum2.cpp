@@ -13,7 +13,7 @@ int main(){
     vector<vector<bool>> dp(N+1,vector<bool>(S+1,false));
     vector<int> ans;
     dp[0][0] = true;
-    for(int i=0; i<=N; i++){
+    for(int i=0; i<N; i++){
         for(int j=0; j<=S; j++){
             if(dp[i][j] == false) continue;
             if(i + 1 > N) continue;
@@ -22,30 +22,27 @@ int main(){
             dp[i+1][j+A[i]] = true;
         }
     }
-    int x,y;
-    y = N;
+
+    if(dp[N][S] == false){
+        cout << "-1" << endl;
+        return 0;
+    }
+    int x;
     x = S;
-    while(true){
-        if(y == 0) break;
-        if(dp[y-1][x - A[y-1]] == true){
-            ans.push_back(y);
-            x = x - A[y-1];
-            y = y-1;
-            // cout << "x " << x << endl;
-        }else{
-            y = y - 1;
+    for(int i=N; i>=1; i--){
+        if(dp[i -1][x] == true){
+           x = x - 0;
+        }else {
+            x = x - A[i-1];
+            ans.push_back(i);
         }
     }
 
     reverse(ans.begin(),ans.end());
-    if(x == 0){
-        cout << ans.size() << endl;
-        for(int i=0; i<ans.size(); i++){
-            cout << ans[i] << " ";
-        }
-    }else {
-        cout << -1 << endl;
+    cout << ans.size() << endl;
+
+    for(int i=0; i<ans.size(); i++){
+        cout << ans[i] << " ";
     }
-    
     return 0;
 }
