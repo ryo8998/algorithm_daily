@@ -1,3 +1,3 @@
-i++){
-    //     cout << (table[q[i]]? "Yes": "No") << endl;
+=N; i++){
+    //     cout << dp[i] << " ";
     // }
